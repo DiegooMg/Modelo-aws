@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Introduce las Fechas {% endblock %}</h1>
+    <form method="post" action="/procesar_log">
+        <label for="fechaHora_start">Inicio</label>
+        <input type="datetime-local" id="fechaHora_start" name="fechaHora_start" required>
+      
+        <label for="fechaHora_end">Fin</label>
+        <input type="datetime-local" id="fechaHora_end" name="fechaHora_end" required>
+        </select><br>
+      
+        <input type="submit" value="Buscar">
+      </form>
+{% endblock %}
