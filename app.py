@@ -105,6 +105,6 @@ if __name__ == "__main__":
     engine = create_engine("postgresql://fl0user:UtmRka5rZVI1@ep-holy-queen-16258744.eu-central-1.aws.neon.fl0.io:5432/database?sslmode=require")
 
     with open('modelo_propinas.pkl', 'rb') as archivo:
-    modelo_cargado = pickle.load(archivo)
+        modelo_cargado = pickle.load(archivo)
     
     app.run(debug=True, port=8080)

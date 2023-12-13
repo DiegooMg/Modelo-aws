@@ -1,5 +1,5 @@
 flask
-notebook
+pyscopg2-binary
 pandas
 scikit-learn
 sqlalchemy
