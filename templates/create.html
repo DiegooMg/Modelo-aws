@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>{% block title %} Parametros a elegir {% endblock %}</h1>
-    <form method="post" action="/procesar_formulario">
+    <form method="post" action="/create">
         
         <label for="numero_decimal">Total de la comida</label>
         <input type="number" step="0.01" id="numero_decimal" name="numero_decimal" required><br>
@@ -42,6 +42,15 @@
         <input type="number" id="numero_entero" name="numero_entero" required><br>      
 
       
-        <input type="submit" value="Predecir">
+        <input type="submit" value="Predecir"><br>
+
+        {% for message in messages %}
+            <div class='message'>
+                <h3>{{ message['title'] }}</h3>
+                <p>{{ message['content'] }}</p>
+            </div>
+        {% endfor %}
+
+
       </form>
 {% endblock %}

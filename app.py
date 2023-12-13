@@ -20,15 +20,9 @@ def index():
     return render_template('index.html', messages=messages)
 
 
-@app.route('/create/', methods=('GET', 'POST'))
+@app.route('/create', methods=('GET', 'POST'))
 def create():
-    return render_template('create.html')
 
-
-
-
-@app.route('/procesar_formulario', methods=['POST'])
-def procesar_formulario():
     if request.method == 'POST':
         total = float(request.form['numero_decimal'])
         sex = int(request.form['genero'])
@@ -36,26 +30,30 @@ def procesar_formulario():
         day = int(request.form['dia'])
         food = int(request.form['comida'])
         size = int(request.form['numero_entero'])
-    x = [[total, sex, smoker, day, food, size]]
-    X = total, sex, smoker, day, food, size
+        x = [[total, sex, smoker, day, food, size]]
+        X = total, sex, smoker, day, food, size
 
-    predi = modelo_cargado.predict(x)
+        predi = modelo_cargado.predict(x)
 
 
-    df = pd.DataFrame({
-    'Predi': [str(predi[0])],
-    'input':[str(X)],
-    'fecha' : [datetime.now()]
-    }
-    )
-    df.to_sql('logs', con=engine, if_exists='append')
+        df = pd.DataFrame({
+        'Predi': [str(predi[0])],
+        'input':[str(X)],
+        'fecha' : [datetime.now()]
+        })
 
-    message_predi = [{
-    'title':f'Te dejaran una Propina aproximada de {round(float(predi), 2)}€'
-    }]
+        df.to_sql('logs', con=engine, if_exists='append')
 
-    return render_template('index_predi.html', messages=message_predi)
 
+        message_predi = [{
+        'title':f'Te dejaran una Propina aproximada de {round(predi[0], 2)}€'
+        }]
+
+        return render_template('create.html', messages=message_predi)
+    message_predi1 = [{
+        'title':f'Esperando la predi'}]
+
+    return render_template('create.html', messages=message_predi1)
 
 
 @app.route('/importance', methods=['GET'])
