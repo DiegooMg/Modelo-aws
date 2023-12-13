@@ -8,11 +8,6 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import io
 
-engine = create_engine("postgresql://diegomg:123456789@database-2.c1dass8yc69q.eu-north-1.rds.amazonaws.com:5432/base1")
-
-with open('modelo_propinas.pkl', 'rb') as archivo:
-    modelo_cargado = pickle.load(archivo)
-
 
 app = Flask(__name__)
 
@@ -106,4 +101,10 @@ def pros_logs():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+
+    engine = create_engine("postgresql://fl0user:UtmRka5rZVI1@ep-holy-queen-16258744.eu-central-1.aws.neon.fl0.io:5432/database?sslmode=require")
+
+    with open('modelo_propinas.pkl', 'rb') as archivo:
+    modelo_cargado = pickle.load(archivo)
+    
+    app.run(debug=True, port=8080)
